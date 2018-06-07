@@ -15,7 +15,6 @@ Function name | Description | Format Specifier
 `` |
 `` |
 `` |
-`` |
 
 ### Example Usage
 
