@@ -5,7 +5,7 @@
 from datetime import datetime
 import json
 import uuid
-
+import models
 
 class BaseModel:
     """Base Class with public instance attributes and methods"""
@@ -24,6 +24,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """ Return the human readable print format"""
@@ -33,6 +34,7 @@ class BaseModel:
     def save(self):
         """Shows the newly updated time from time of instance creation"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionay containing all keys/values"""
