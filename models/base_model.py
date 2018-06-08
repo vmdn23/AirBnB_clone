@@ -47,7 +47,7 @@ class BaseModel:
     	my_dict['__class__'] = self.__class__.__name__
     	return my_dict
 
-	def update(self, *args, **kwargs):
+    def update(self, *args, **kwargs):
        """Updates class to include args and kwargs"""
        base_attr = ['created_at', 'updated_at']
        if args:
