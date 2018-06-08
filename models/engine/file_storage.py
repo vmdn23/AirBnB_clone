@@ -18,11 +18,7 @@ class FileStorage:
 
         def new(self, obj):
                 """Returns __objects with obj set as key"""
-<<<<<<< HEAD
                 key = '{}.{}'.format(obj.__class__.__name__, obj.id)
-=======
-                key = '{}.{}'.format( obj.__class__.__name__, obj.id)
->>>>>>> bca0a945bdc5359e5ce5cc1cae04704c2390f021
                 self.__objects[key] = obj
 
         def save(self):
@@ -30,19 +26,11 @@ class FileStorage:
                 save_file = self.__file_path
                 new_dict = {}
                 for key, item in self.__objects.items():
-<<<<<<< HEAD
 #                        if type(obj) is dict:
 #                               new_dic[key] = item
 #                        else:
                         new_dict[key] = item.to_dict()
                 with open(save_file, "w", encoding='utf-8') as new_file:
-=======
-                        if type(item) is dict:
-                                new_dic[key] = item
-                        else:
-                                new_dict[key] = item.to_dict()
-                with open(save_file, "w+", encoding='utf-8') as new_file:
->>>>>>> bca0a945bdc5359e5ce5cc1cae04704c2390f021
                         json.dump(new_dict, new_file)
 
         def reload(self):
