@@ -43,3 +43,4 @@ class BaseModel:
                 my_dict[key] = item
         my_dict['__class__'] = self.__class__.__name__
         return my_dict
+    
