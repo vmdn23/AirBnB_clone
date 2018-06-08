@@ -11,13 +11,21 @@ class BaseModel:
     """Base Class with public instance attributes and methods"""
 
 
-    def __init__(self, id=None, created_at="", updated_at=""):
+    def __init__(self, *args, **kwargs):
     	"""Instantiates the attributes of the BaseModel class"""
-    	self.id = str(uuid.uuid4())
-    	self.created_at = datetime.now()
-    	self.updated_at = datetime.now()
-    	self.save()
-
+    	if args is not None and len(args) > 0:
+    		pass
+    	if kwargs:
+    		for key, item in kwargs.items():
+    			if key in ['created_at', 'updated_at']:
+    				item = datetime.strptime(item, "%Y-%m-%dT%H:%M:%S.%f")
+    			if key not in ['__class__']:
+    				setattr(self, key, item)
+    	else:
+    		self.id = str(uuid.uuid4())
+    		self.created_at = datetime.now()
+    		self.updated_at = datetime.now()
+    		self.save()
 
     def __str__(self):
     	""" Return the human readable print format"""
