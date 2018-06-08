@@ -1,25 +1,25 @@
 #!/usr/bin/python3
-'''Class FileStorage'''
+"""Class FileStorage"""
 
 import json
 from models.base_model import BaseModel
 
 class FileStorage:
-        '''Private class attributes for Class FileStorage'''
+        """Private class attributes for Class FileStorage"""
         __file_path = 'file.json'
         __objects = {}
 
         def all(self):
-                '''Returns the dictionary with objects'''
+                """Returns the dictionary with objects"""
                 return FileStorage.__objects
 
         def new(self, obj):
-                '''Returns __objects with obj set as key'''
+                """Returns __objects with obj set as key"""
                 key = '{}.{}'.format( obj.__class__.__name__, id)
                 self.__object[key] = obj
 
         def save(self):
-                '''Serializes __objects to JSON file inside'''
+                """Serializes __objects to JSON file inside"""
                 save_file = self.__file_path
                 new_dict = {}
                 for key, item in self.__objects.items():
@@ -31,7 +31,7 @@ class FileStorage:
                         json.dump(new_dict, mew_file)
 
         def reload(self):
-                '''deserializes the JSON file to __objects
+                """Deserializes the JSON file to __objects
                 (only if the JSON file exists ; otherwise, do nothing)
-                '''
+                """
                 pass
