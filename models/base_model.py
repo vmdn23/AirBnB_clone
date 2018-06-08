@@ -10,7 +10,6 @@ import json
 class BaseModel:
     """Base Class with public instance attributes and methods"""
 
-
     def __init__(self, *args, **kwargs):
     	"""Instantiates the attributes of the BaseModel class"""
     	if args is not None and len(args) > 0:
@@ -47,7 +46,7 @@ class BaseModel:
     	my_dict['__class__'] = self.__class__.__name__
     	return my_dict
 
-	def update(self, *args, **kwargs):
+    def update(self, *args, **kwargs):
        """Updates class to include args and kwargs"""
        base_attr = ['created_at', 'updated_at']
        if args:
