@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """Class BaseModel"""
 
-
-import uuid
 from datetime import datetime
 import json
+import uuid
 
 
 class BaseModel:

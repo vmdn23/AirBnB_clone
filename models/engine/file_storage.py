@@ -1,1 +1,27 @@
 #!/usr/bin/python3
+'''Class FileStorage'''
+
+
+class FileStorage:
+        '''Privat class attributes for Class FileStorage'''
+        __file_path = 'file.json'
+        __objects = {}
+
+        def all(self):
+                '''Returns the dictionary with objects'''
+                return FileStorage.__objects
+
+        def new(self, obj):
+                '''Returns __objects with obj set as key'''
+                key = '{}.{}'.format( obj.__class__.__name__, id)
+                self.__object[key] = obj
+
+        def save(self):
+                '''Serializes __objects to JSON file inside'''
+                pass
+
+        def reload(self):
+                '''deserializes the JSON file to __objects
+                (only if the JSON file exists ; otherwise, do nothing)
+                '''
+                pass
