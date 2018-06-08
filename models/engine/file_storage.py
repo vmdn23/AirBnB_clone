@@ -3,7 +3,7 @@
 
 
 class FileStorage:
-        '''Privat class attributes for Class FileStorage'''
+        '''Private class attributes for Class FileStorage'''
         __file_path = 'file.json'
         __objects = {}
 
