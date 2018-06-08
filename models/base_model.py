@@ -34,7 +34,7 @@ class BaseModel:
 
     def save(self):
     	"""Shows the newly updated time from time of instance creation"""
-    	self.updated_at = datetime.utcnow()
+    	self.updated_at = datetime.now()
 
     def to_dict(self):
     	"""Returns a dictionay containing all keys/values"""
@@ -46,3 +46,13 @@ class BaseModel:
     			my_dict[key] = item
     	my_dict['__class__'] = self.__class__.__name__
     	return my_dict
+
+	def update(self, *args, **kwargs):
+       """Updates class to include args and kwargs"""
+       base_attr = ['created_at', 'updated_at']
+       if args:
+           for idx, value in enumerate(args):
+               setattr(self, base_attr[idx], value)
+       elif kwargs:
+           for key, value in kwargs.items():
+               setattr(self, key, value)
