@@ -34,11 +34,11 @@ class FileStorage:
                 """Deserializes the JSON file to __objects
                 only if the JSON file exists; otherwise, do nothing
                 """
-                new_dict = {}
+                reload_dict = {}
                 try:
                         with open(FileStorage.__file_path, mode="r") as a_file:
-                                new_dict = (json.load(a_file))
-                                for key, value in new_dict.items():
+                                reload_dict = (json.load(a_file))
+                                for key, value in reload_dict.items():
                                         obj = BaseModel(**value)
                                         self.__objects[key] = obj
                 except:
