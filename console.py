@@ -1,29 +1,43 @@
 #!/usr/bin/python3
-import cmd, sys, json
+"""This is the console for the Holberton HNBN project"""
+
+
+import cmd
+import sys
+import json
+from models.base_model import BaseModel
+
 
 class HBNBCommand(cmd.Cmd):
-	'''Class HBNB command line console prompt'''
-	prompt = '(hbnb) '
+    '''Class HBNB command line console prompt'''
+    prompt = "(hbnb) "
+    group = {'BaseModel'}
 
+    def do_create(self, arg):
+        """Used to create a new instance of BaseModel save the instance to
+        JSON file"""
+        if arg == "":
+            print("** class name missing **")
+        elif arg not in self.group:
+            print("** class doesn't exist **")
+        else:
+            arg = BaseModel()
+            arg.save()
+            print(arg.id)
 
-	def default(self, line):
-		"""default response for unknown commands"""
-		pass
+    def emptyline(self):
+        """Called when an empty line is entered
+        Prints the prompt again
+        """
+        pass
 
-	def emptyline(self):
-		"""Called when an empty line is entered
-		Prints the prompt again
-		"""
-		pass
+    def do_quit(self, line):
+        """Quit command to exit the program"""
+        return True
 
-	def do_quit(self, line):
-		"""Quit command to exit the program"""
-		return True
-
-	def do_EOF(self, line):
-		"""Executes the EOF (Ctrl -D/ Ctrl-Z) commands on console"""
-		return True
-
+    def do_EOF(self, line):
+        """Executes the EOF (Ctrl -D/ Ctrl-Z) commands on console"""
+        return True
 
 
 if __name__ == '__main__':
