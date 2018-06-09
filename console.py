@@ -9,13 +9,13 @@ from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
-    '''Class HBNB command line console prompt'''
+    """Class HBNB command line console prompt"""
     prompt = "(hbnb) "
     group = {'BaseModel'}
 
     def do_create(self, arg):
-        """Used to create a new instance of BaseModel save the instance to
-        JSON file"""
+        """Used to create a new instance of BaseModel and saves
+        the instance to a JSON file"""
         if arg == "":
             print("** class name missing **")
         elif arg not in self.group:
