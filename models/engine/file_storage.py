@@ -26,9 +26,6 @@ class FileStorage:
                 save_file = self.__file_path
                 new_dict = {}
                 for key, item in self.__objects.items():
-#                        if type(obj) is dict:
-#                               new_dic[key] = item
-#                        else:
                         new_dict[key] = item.to_dict()
                 with open(save_file, "w", encoding='utf-8') as new_file:
                         json.dump(new_dict, new_file)
