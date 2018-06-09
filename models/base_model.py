@@ -7,6 +7,7 @@ import json
 import uuid
 import models
 
+
 class BaseModel:
     """Base Class with public instance attributes and methods"""
 
@@ -25,7 +26,6 @@ class BaseModel:
             self.created_at = datetime.now()
             models.storage.new(self)
             self.updated_at = datetime.now()
-
 
     def __str__(self):
         """ Return the human readable print format"""
