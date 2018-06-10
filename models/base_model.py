@@ -35,6 +35,7 @@ class BaseModel:
     def save(self):
         """Shows the newly updated time from time of instance creation"""
         self.updated_at = datetime.now()
+        models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
