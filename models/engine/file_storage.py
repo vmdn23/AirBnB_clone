@@ -19,7 +19,7 @@ class FileStorage:
     def new(self, obj):
         """Returns __objects with obj set as key"""
         key = '{}.{}'.format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj.to_dict()
+        self.__objects[key] = obj
 
     def save(self):
         """Serializes __objects to JSON file inside"""
