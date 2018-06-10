@@ -9,17 +9,29 @@ from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
-    """Class HBNB command line console prompt"""
+    """Class HBNB command line console prompt
+       prompt - The start prompt for the HBNB console
+       group - contains all the classes used in the project
+    """
     prompt = "(hbnb) "
     group = {'BaseModel'}
+
+    def err_msg(self, n):
+        """Returns Error Messages"""
+        if n == 1:
+            print("** class name missing **")
+        elif n == 2:
+            print("** class doesn't exist **")
+        else:
+            print("** instance id missing **")
 
     def do_create(self, arg):
         """Used to create a new instance of BaseModel and saves
         the instance to a JSON file"""
         if arg == "":
-            print("** class name missing **")
+           self.err_msg(1)
         elif arg not in self.group:
-            print("** class doesn't exist **")
+            self.err_msg(2)
         else:
             arg = BaseModel()
             arg.save()
