@@ -16,22 +16,23 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     group = {'BaseModel'}
 
-    def err_msg(self, n):
-        """Returns Error Messages"""
-        if n == 1:
-            print("** class name missing **")
-        elif n == 2:
-            print("** class doesn't exist **")
-        else:
-            print("** instance id missing **")
+    def err_mg(self, n):
+        """Function to return error messages"""
+        msg_dict = {1: "** class name missing **",\
+                    2: "** class doesnt't exist**",
+                    3: "instance id missing**"
+        }
+        for key, item in msg_dict.items():
+            if key == n:
+                print(item)
 
     def do_create(self, arg):
         """Used to create a new instance of BaseModel and saves
         the instance to a JSON file"""
         if arg == "":
-           self.err_msg(1)
+           self.err_mg(1)
         elif arg not in self.group:
-            self.err_msg(2)
+            self.err_mg(2)
         else:
             arg = BaseModel()
             arg.save()
