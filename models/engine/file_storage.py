@@ -19,12 +19,12 @@ class FileStorage:
     def new(self, obj):
         """Returns __objects with obj set as key"""
         key = '{}.{}'.format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        self.__objects[key] = obj.to_dict()
 
     def save(self):
         """Serializes __objects to JSON file inside"""
         save_file = self.__file_path
-        new_dict = {}
+        new_dict = {} #not necessary to make a copy -- write __objects direct
         for key, item in self.__objects.items():
             new_dict[key] = item.to_dict()
         with open(save_file, "w", encoding='utf-8') as new_file:
