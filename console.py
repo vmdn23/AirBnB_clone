@@ -8,6 +8,7 @@ import json
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """Class HBNB command line console prompt
        prompt - The start prompt for the HBNB console
@@ -51,16 +52,44 @@ class HBNBCommand(cmd.Cmd):
             self.err_msg(3)
         else:
             try:
-                with open(self.file_path, 'r') as f:
-                    f = json.loads(f.read())
-                for k, v in f.items():
-                    for a, b in v.items():
-                        if b == arg[1]:
-                            obj = BaseModel(**v)
-                            print(obj)
+                with open(self.file_path, 'r') as open_file:
+                    open_file = json.loads(open_file.read())
+            except FileNotFoundError:
                 self.err_msg(4)
-            except:
+                return
+            for instance_key, instance_dict in open_file.items():
+                for key, item in instance_dict.items():
+                    if item == arg[1]:
+                        obj = BaseModel(**instance_dict)
+                        print(obj)
+                        return
+            self.err_msg(4)
+
+    def do_destroy(self, line):
+        """Function to print string representation of instance"""
+        arg = line.split()
+        if line == "":
+            self.err_msg(1)
+        elif arg[0] not in self.group:
+            self.err_msg(2)
+        elif len(arg) < 2:
+            self.err_msg(3)
+        else:
+            try:
+                with open(self.file_path, 'r') as open_file:
+                    open_file = json.loads(open_file.read())
+            except FileNotFoundError:
                 self.err_msg(4)
+                return
+            open_file_copy = open_file.copy()
+            for instance_key, instance_dict in open_file_copy.items():
+                for key, item in instance_dict.items():
+                    if item == arg[1]:
+                        del open_file[instance_key]
+#                        storage._FileStorage__file_path = open_file
+                        storage.save()
+                        return
+            self.err_msg(4)
 
     def emptyline(self):
         """Called when an empty line is entered
