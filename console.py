@@ -6,7 +6,7 @@ import cmd
 import sys
 import json
 from models.base_model import BaseModel
-
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """Class HBNB command line console prompt
@@ -15,6 +15,7 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
     group = {'BaseModel'}
+    file_path = storage._FileStorage__file_path
 
     def err_msg(self, n):
         """Function to return error messages"""
@@ -49,7 +50,17 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg) < 2:
             self.err_msg(3)
         else:
-            print("testing")
+            try:
+                with open(self.file_path, 'r') as f:
+                    f = json.loads(f.read())
+                for k, v in f.items():
+                    for a, b in v.items():
+                        if b == arg[1]:
+                            obj = BaseModel(**v)
+                            print(obj)
+                self.err_msg(4)
+            except:
+                self.err_msg(4)
 
     def emptyline(self):
         """Called when an empty line is entered
