@@ -5,6 +5,7 @@
 import cmd
 import sys
 import json
+import models
 from models.base_model import BaseModel
 from models import storage
 
@@ -51,19 +52,13 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg) < 2:
             self.err_msg(3)
         else:
+            data_dump = models.storage.all()
+            key = "{}.{}".format(arg[0], arg[1])
             try:
-                with open(self.file_path, 'r') as open_file:
-                    open_file = json.loads(open_file.read())
-            except FileNotFoundError:
+                obj = data_dump[key]
+                print(obj)
+            except KeyError:
                 self.err_msg(4)
-                return
-            for instance_key, instance_dict in open_file.items():
-                for key, item in instance_dict.items():
-                    if item == arg[1]:
-                        obj = BaseModel(**instance_dict)
-                        print(obj)
-                        return
-            self.err_msg(4)
 
     def do_destroy(self, line):
         """Function to print string representation of instance"""
@@ -75,20 +70,13 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg) < 2:
             self.err_msg(3)
         else:
-            try:
-                with open(self.file_path, 'r') as open_file:
-                    open_file = json.loads(open_file.read())
-            except FileNotFoundError:
-                self.err_msg(4)
-                return
-            open_file_copy = open_file.copy()
-            for instance_key, instance_dict in open_file_copy.items():
-                for key, item in instance_dict.items():
-                    if item == arg[1]:
-                        del open_file[instance_key]
-#                        storage._FileStorage__file_path = open_file
-                        storage.save()
-                        return
+            data_dump = models.storage.all()
+            key = "{}.{}".format(arg[0], arg[1])
+            if key in data_dump:
+                    del data_dump[key]
+                    storage._FileStorage__objects = data_dump
+                    storage.save()
+                    return
             self.err_msg(4)
 
     def emptyline(self):
