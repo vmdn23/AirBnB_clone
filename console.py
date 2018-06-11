@@ -6,6 +6,7 @@ import cmd
 import sys
 import json
 import models
+import shlex
 from models.base_model import BaseModel
 from models import storage
 
@@ -24,7 +25,9 @@ class HBNBCommand(cmd.Cmd):
         msg_dict = {1: "** class name missing **",
                     2: "** class doesn't exist **",
                     3: "** instance id missing **",
-                    4: "** no instance found **"
+                    4: "** no instance found **",
+                    5: "** attribute name missing **",
+                    6: "** value missing **"
                     }
         for key, item in msg_dict.items():
             if key == n:
@@ -78,6 +81,56 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
                     return
             self.err_msg(4)
+
+    def do_all(self, line=""):
+        """Function that displays all class instances of given argument or all
+        if no argument given"""
+        data_dump = models.storage.all()
+        if line is "":
+            for instance_key, instance_obj in data_dump.items():
+                print(instance_obj)
+        else:
+            arg = line.split()
+            if arg[0] not in self.group:
+                self.err_msg(2)
+            else:
+                for instance_key, instance_obj in data_dump.items():
+                    obj = instance_obj.to_dict()
+                    if obj['__class__'] == arg[0]:
+                        print(instance_obj)
+
+    def splitter(self, line):
+        """Function to split line into arguments using shlex"""
+        lex = shlex.shlex(line)
+        lex.quotes = '"'
+        lex.whitespace_split = True
+        lex.commenters = ''
+        return list(lex)
+
+    def do_update(self, line=""):
+        """Updates an instance based on the class name and id by adding or
+        updating attribute and save the change into the JSON file"""
+        data_dump = models.storage.all()
+        arg = self.splitter(line)
+
+        if not line:
+            self.err_msg(1)
+        elif arg[0] not in self.group:
+            self.err_msg(2)
+        elif len(arg) < 2:
+            self.err_msg(3)
+        else:
+            key = "{}.{}".format(arg[0], arg[1])
+            if key in data_dump:
+                if len(arg) < 3:
+                    self.err_msg(5)
+                elif len(arg) < 4:
+                    self.err_msg(6)
+                else:
+                    obj = data_dump[key]
+                    setattr(obj, arg[2], arg[3])
+            else:
+                self.err_msg(4)
 
     def emptyline(self):
         """Called when an empty line is entered
