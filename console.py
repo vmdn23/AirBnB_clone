@@ -9,6 +9,7 @@ import models
 import shlex
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -17,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
        group - contains all the classes used in the project
     """
     prompt = "(hbnb) "
-    group = {'BaseModel'}
+    group = {'BaseModel', 'User'}
     file_path = storage._FileStorage__file_path
 
     def err_msg(self, n):
@@ -41,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in self.group:
             self.err_msg(2)
         else:
-            arg = BaseModel()
+            arg = eval(arg)()
             arg.save()
             print(arg.id)
 

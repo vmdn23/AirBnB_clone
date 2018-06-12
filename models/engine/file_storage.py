@@ -5,6 +5,7 @@
 import json
 from datetime import datetime
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -39,7 +40,7 @@ class FileStorage:
             with open(FileStorage.__file_path, mode="r") as a_file:
                 reload_dict = (json.load(a_file))
                 for key, value in reload_dict.items():
-                    obj = BaseModel(**value)
+                    obj = eval("{}".format(value["__class__"]))(**value)
                     self.__objects[key] = obj
         except BaseException:
             pass
