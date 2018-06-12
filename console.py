@@ -7,8 +7,13 @@ import sys
 import json
 import models
 import shlex
+from models import Amenity
 from models.base_model import BaseModel
+from models import City
+from models import Place
+from models import State
 from models import storage
+from models import Review
 from models.user import User
 
 
@@ -18,7 +23,8 @@ class HBNBCommand(cmd.Cmd):
        group - contains all the classes used in the project
     """
     prompt = "(hbnb) "
-    group = {'BaseModel', 'User'}
+    group = {'BaseModel', 'User', 'State', 'City',
+             'Amenity', 'Place', 'Review'}
     file_path = storage._FileStorage__file_path
 
     def err_msg(self, n):

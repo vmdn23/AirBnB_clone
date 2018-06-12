@@ -5,12 +5,9 @@
 import json
 import models
 from datetime import datetime
-<<<<<<< HEAD
-#from models.base_model import BaseModel
-=======
+from models.base_model import BaseModel
 from models.base_model import BaseModel
 from models.user import User
->>>>>>> b67ca62843e7fb50ac73d3fea4d208144c110fbc
 
 
 class FileStorage:
@@ -45,13 +42,7 @@ class FileStorage:
             with open(FileStorage.__file_path, mode="r") as a_file:
                 reload_dict = (json.load(a_file))
                 for key, value in reload_dict.items():
-<<<<<<< HEAD
                     func = "models.{}".format(value['__class__'])
                     self.__objects[key] = eval(func)(**value)
         except FileNotFoundError:
-=======
-                    obj = eval("{}".format(value["__class__"]))(**value)
-                    self.__objects[key] = obj
-        except BaseException:
->>>>>>> b67ca62843e7fb50ac73d3fea4d208144c110fbc
             pass
