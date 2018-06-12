@@ -4,8 +4,13 @@
 
 import json
 import models
-from datetime import datetime
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from datetime import datetime
+from models.place import Place
+from models.review import Review
+from models.state import State
 from models.user import User
 
 
@@ -41,7 +46,7 @@ class FileStorage:
             with open(FileStorage.__file_path, mode="r") as a_file:
                 reload_dict = (json.load(a_file))
                 for key, value in reload_dict.items():
-                    obj = self.__class__.__name__(**value)
+                    obj = eval(value['__class__'])(**value)
                     self.__objects[key] = obj
         except FileNotFoundError:
             pass
