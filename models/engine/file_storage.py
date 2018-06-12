@@ -41,7 +41,7 @@ class FileStorage:
             with open(FileStorage.__file_path, mode="r") as a_file:
                 reload_dict = (json.load(a_file))
                 for key, value in reload_dict.items():
-                    func = "models.{}".format(value['__class__'])
-                    self.__objects[key] = eval(func)(**value)
+                    obj = self.__class__.__name__(**value)
+                    self.__objects[key] = obj
         except FileNotFoundError:
             pass
