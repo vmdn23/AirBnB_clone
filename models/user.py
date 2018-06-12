@@ -3,10 +3,9 @@
 
 
 import models
-import models.base_model import BaseModel
 
 
-class User(BaseModel):
+class User(models.BaseModel):
     """A user class that inherits from BaseModel"""
     email = " "
     password = " "
