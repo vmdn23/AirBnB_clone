@@ -99,3 +99,7 @@ class Test_BaseModel(unittest.TestCase):
         self.assertTrue(hasattr(b1, "created_at"))
         self.assertTrue(hasattr(b1, "updated_at"))
         self.assertTrue(hasattr(b1, "id"))
+
+    def test_save(self):
+        """Tests to see if the save fuction works"""
+        pass
