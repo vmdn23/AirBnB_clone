@@ -28,7 +28,7 @@ class Test_BaseModel(unittest.TestCase):
         """Pep8 Test"""
         style = pep8.StyleGuide(quiet=True)
         result = style.check_files(['models/base_model.py'])
-        self.assertEqual(result.total_errors, 0, "pep8")
+        self.assertEqual(result.total_errors, 0, "fix pep8")
 
     def setUp(self):
         """
