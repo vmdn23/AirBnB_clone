@@ -128,11 +128,8 @@ class HBNBCommand(cmd.Cmd):
         # print(command, sep[0], arg)
         if arg == "":
             new_line = "{}".format(sep[0])
-            # print(type(new_line))
         else:
             new_line = "{} {}".format(sep[0], arg)
-            # print(arg.split(" "))
-            # print(new_line)
         func[command](new_line)
 
     def do_count(self, arg):
