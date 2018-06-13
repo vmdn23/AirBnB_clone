@@ -4,9 +4,10 @@ Unittest for user_model
 """
 
 
-import unittest
 from models.user import User
 import pep8
+import os
+import unittest
 
 
 class Test_User(unittest.TestCase):
