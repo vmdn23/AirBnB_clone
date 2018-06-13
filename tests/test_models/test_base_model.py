@@ -5,8 +5,6 @@ Unittest for base_model
 
 
 import unittest
-import sys
-from io import StringIO
 from models.base_model import BaseModel
 import os
 import pep8
@@ -102,4 +100,7 @@ class Test_BaseModel(unittest.TestCase):
 
     def test_save(self):
         """Tests to see if the save fuction works"""
-        pass
+        b1 = BaseModel()
+        b1.save()
+        b_dict = b1.to_dict()
+        self.assertNotEqual(b_dict['created_at'], b_dict['updated_at'])
