@@ -96,4 +96,3 @@ class Test_FileStorage(unittest.TestCase):
             for item in f:
                 self.assertEqual(item, "{}")
         self.assertIs(temp_storage.reload(), None)
-        
