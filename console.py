@@ -3,18 +3,10 @@
 
 
 import cmd
-import sys
-import json
 import models
 import shlex
-from models import Amenity
-from models.base_model import BaseModel
-from models import City
-from models import Place
-from models import State
 from models import storage
-from models import Review
-from models.user import User
+
 
 
 class HBNBCommand(cmd.Cmd):
