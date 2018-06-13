@@ -83,10 +83,10 @@ class HBNBCommand(cmd.Cmd):
             data_dump = models.storage.all()
             key = "{}.{}".format(arg[0], arg[1])
             if key in data_dump:
-                    del data_dump[key]
-                    storage._FileStorage__objects = data_dump
-                    storage.save()
-                    return
+                del data_dump[key]
+                storage._FileStorage__objects = data_dump
+                storage.save()
+                return
             self.err_msg(4)
 
     def do_all(self, line=""):
@@ -106,6 +106,45 @@ class HBNBCommand(cmd.Cmd):
                     if obj['__class__'] == arg[0]:
                         print(instance_obj)
 
+    def default(self, line):
+        """Called on an input line when comman prefix is swapped to
+        method of instance"""
+        func = {'create': self.do_create, 'show': self.do_show,
+                'destroy': self.do_destroy, 'count': self.do_count,
+                'all': self.do_all, 'update': self.do_update}
+        symbols = {'"', ',', '{', '}', ':', "'"}
+        sep = line.split('.')
+        command = ""
+        x = 0
+        while sep[1][x] != '(':
+            command += sep[1][x]
+            x += 1
+        y = len(command) + 1
+        arg = ""
+        while sep[1][y] != ')':
+            if sep[1][y] not in symbols:
+                arg += sep[1][y]
+            y += 1
+        # print(command, sep[0], arg)
+        if arg == "":
+            new_line = "{}".format(sep[0])
+            # print(type(new_line))
+        else:
+            new_line = "{} {}".format(sep[0], arg)
+            # print(arg.split(" "))
+            # print(new_line)
+        func[command](new_line)
+
+    def do_count(self, arg):
+        """Function to return a count of all instances of a given class"""
+        data_dump = models.storage.all()
+        count = 0
+        for key, item in data_dump.items():
+            obj = item.to_dict()
+            if obj['__class__'] == arg:
+                count += 1
+        print(count)
+
     def splitter(self, line):
         """Function to split line into arguments using shlex"""
         lex = shlex.shlex(line)
@@ -119,6 +158,7 @@ class HBNBCommand(cmd.Cmd):
         updating attribute and save the change into the JSON file"""
         data_dump = models.storage.all()
         arg = self.splitter(line)
+        # arg = line.split()
 
         if not line:
             self.err_msg(1)
