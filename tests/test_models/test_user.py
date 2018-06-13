@@ -2,19 +2,19 @@
 """
 Unittest for user_model
 """
+
+
 import unittest
-import sys
-from io import StringIO
 from models.user import User
 import pep8
 
 
 class Test_User(unittest.TestCase):
     """
-    Test class User
+    Unittest for the class User
     """
     def test_docstring(self):
-        """check that docstring exist"""
+        """Checks for docstring"""
         self.assertTrue(len(User.__doc__) > 1)
         self.assertTrue(len(User.__init__.__doc__) > 1)
         self.assertTrue(len(User.__str__.__doc__) > 1)
@@ -29,38 +29,44 @@ class Test_User(unittest.TestCase):
 
     def setUp(self):
         """
-        redirect stdout of the output for functions using print
+        Setup test
         """
-        sys.stdout = StringIO
+        pass
 
     def tearDown(self):
         """
-        re-establish the stdout back to normal after setUp
+        Resets tests
         """
-        sys.stdout = sys.__stdout__
+        try:
+            os.remove("file.json")
+        except:
+            pass
 
     def test_init_arg(self):
         """pass in arg to new instance"""
-        b0 = User(12)
-        self.assertEqual(type(b0).__name__, "User")
-        self.assertFalse(hasattr(b0, "12"))
+        b1 = User(23)
+        self.assertEqual(type(23).__name__, "User")
+        self.assertFalse(hasattr(b1, "23"))
 
     def test_init_kwarg(self):
-        """pass in kwargs to instance"""
-        b00 = User(name="Tehe")
-        self.assertEqual(type(b00).__name__, "User")
-        self.assertTrue(hasattr(b00, "name"))
-        self.assertFalse(hasattr(b00, "id"))
-        self.assertFalse(hasattr(b00, "created_at"))
-        self.assertFalse(hasattr(b00, "updated_at"))
-        self.assertTrue(hasattr(b00, "__class__"))
+        """Pass kwargs into the instance"""
+        b1 = User(name="Silver")
+        self.assertEqual(type(b1).__name__, "User")
+        self.assertTrue(hasattr(b1, "name"))
+        self.assertFalse(hasattr(b1, "id"))
+        self.assertFalse(hasattr(b1, "created_at"))
+        self.assertFalse(hasattr(b1, "updated_at"))
+        self.assertTrue(hasattr(b1, "__class__"))
 
-    def test_init_argfail(self):
-        """init arg should fail"""
-        b000 = User()
+    def test_str_method(self):
+        """Tests to see if each method is printing accurately"""
+        b1 = User()
+        b1printed = b1.__str__()
+        self.assertEqual(b1printed,
+                         "[User] ({}) {}".format(b1.id, b1.__dict__))
 
     def test_before_todict(self):
-        """test instances before method todict conversion"""
+        """Tests instances before using to_dict conversion"""
         b1 = User()
         b1_dict = b1.__dict__
         self.assertEqual(type(b1).__name__, "User")
@@ -72,7 +78,7 @@ class Test_User(unittest.TestCase):
         self.assertTrue(type(b1_dict['id']), 'str')
 
     def test_after_todict(self):
-        """test instances after method to_dict conversion"""
+        """Test instances after using to_dict conversion"""
         my_model = User()
         new_model = User()
         test_dict = my_model.to_dict()
@@ -85,17 +91,10 @@ class Test_User(unittest.TestCase):
         self.assertTrue(type(test_dict['id']), 'str')
         self.assertNotEqual(my_model.id, new_model.id)
 
-    def test_str_method(self):
-        """test that each method is printing accurately"""
-        b3 = User()
-        b3printed = b3.__str__()
-        self.assertEqual(b3printed,
-                         "[User] ({}) {}".format(b3.id, b3.__dict__))
-
     def test_hasattribute(self):
-        """test that instance of Base have been correctly made"""
-        b2 = User()
-        self.assertTrue(hasattr(b2, "__init__"))
-        self.assertTrue(hasattr(b2, "created_at"))
-        self.assertTrue(hasattr(b2, "updated_at"))
-        self.assertTrue(hasattr(b2, "id"))
+        """Tests if the instance of BaseModel has been correctly made"""
+        b1 = User()
+        self.assertTrue(hasattr(b1, "__init__"))
+        self.assertTrue(hasattr(b1, "created_at"))
+        self.assertTrue(hasattr(b1, "updated_at"))
+        self.assertTrue(hasattr(b1, "id"))
