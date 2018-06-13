@@ -45,7 +45,7 @@ class Test_User(unittest.TestCase):
     def test_init_arg(self):
         """pass in arg to new instance"""
         b1 = User(23)
-        self.assertEqual(type(23).__name__, "User")
+        self.assertEqual(type(b1).__name__, "User")
         self.assertFalse(hasattr(b1, "23"))
 
     def test_init_kwarg(self):
