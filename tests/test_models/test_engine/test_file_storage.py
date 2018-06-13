@@ -4,6 +4,13 @@
 
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models.amenity import Amenity
+from models.city import City
+from datetime import datetime
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 import models
 import os
 import sys
@@ -30,7 +37,7 @@ class Test_FileStorage(unittest.TestCase):
         self.assertEqual(result.total_errors, 0, "fix pep8")
 
     def setUp(self):
-        """Sets up testing environment to not change the
+        """Sets up the testing environment to not change the
         previous file storage
         """
         self.file_path = models.storage._FileStorage__file_path
@@ -38,22 +45,55 @@ class Test_FileStorage(unittest.TestCase):
             os.rename(self.file_path, 'test_storage')
 
     def tearDown(self):
-        """Removes JSON file after test cases run """
+        """Removes the JSON file after test cases run """
         if os.path.exists(self.file_path):
             os.remove(self.file_path)
         if os.path.exists('test_storage'):
             os.rename('test_storage', self.file_path)
 
+    def test_instantiation(self):
+        """Tests for proper instantiation"""
+        temp_storage = FileStorage()
+        self.assertIsInstance(temp_storage, FileStorage)
+
     def test_saves_new_instance(self):
-        """ Tests if file is being created """
-        a = BaseModel()
-        models.storage.new(a)
+        """Tests if file is being created """
+        b1 = BaseModel()
+        models.storage.new(b1)
         models.storage.save()
         file_exist = os.path.exists(self.file_path)
         self.assertTrue(file_exist)
 
-    def test_json(self):
-        """Checks for errors related to the JSON conversion"""
-        with self.assertRaises(AttributeError):
-            FileStorage.__objects
-            FileStorage.__File_Path
+    def test_all(self):
+        """Tests the all method"""
+        temp_storage = FileStorage()
+        temp_dict = temp_storage.all()
+        self.assertIsNotNone(temp_dict)
+        self.assertEqual(type(temp_dict), dict)
+
+    def test_new(self):
+        """Tests the new method"""
+        temp_storage = FileStorage()
+        temp_dict = temp_storage.all()
+        Holberton = User()
+        Holberton.id = 972
+        Holberton.name = "Holberton"
+        temp_storage.new(Holberton)
+        class_name = Holberton.__class__.__name__
+        key = "{}.{}".format(class_name, str(Holberton.id))
+        self.assertIsNotNone(temp_dict[key])
+
+    def test_reload(self):
+        """Tests for the reload method"""
+        temp_storage = FileStorage()
+        try:
+            os.remove("file.json")
+        except:
+            pass
+        with open("file.json", "w") as f:
+            f.write("{}")
+        with open("file.json", "r") as f:
+            for item in f:
+                self.assertEqual(item, "{}")
+        self.assertIs(temp_storage.reload(), None)
+        
