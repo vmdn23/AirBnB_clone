@@ -125,12 +125,21 @@ class HBNBCommand(cmd.Cmd):
             if sep[1][y] not in symbols:
                 arg += sep[1][y]
             y += 1
-        # print(command, sep[0], arg)
         if arg == "":
             new_line = "{}".format(sep[0])
+            func[command](new_line)
         else:
-            new_line = "{} {}".format(sep[0], arg)
-        func[command](new_line)
+            p = arg.split(" ")
+            if len(p) == 5:
+                arg1 = "{} {} {}".format(p[0], p[1], p[2])
+                arg2 = "{} {} {}".format(p[0], p[3], p[4])
+                new_line1 = "{} {}".format(sep[0], arg1)
+                new_line2 = "{} {}".format(sep[0], arg2)
+                func[command](new_line1)
+                func[command](new_line2)
+            else:
+                new_line3 = "{} {}".format(sep[0], arg)
+                func[command](new_line3)
 
     def do_count(self, arg):
         """Function to return a count of all instances of a given class"""
