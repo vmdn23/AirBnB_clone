@@ -1,7 +1,7 @@
 # 0x00. AirBnB clone - The console
 ![Image of Holberton B&B Logo](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/263/HBTN-hbnb-Final.png)
 
-## Airbnb Clone - Command Interpreter Project Description
+## Holberton School Airbnb Clone - Command Interpreter Project Description
 ### This is the first of a multipart project working towards building a full web application clone of AirBnb. In this first part, the Python programming language is used to build a command interpreter for the clone's web app. This command interpreter is similar to a BASH shell but it is designed for a specific use case. The following projects will incorporate additional sections like HTML/CSS templating, database storage, API and front-end integration.
 
 ## How to start the interpreter
@@ -29,7 +29,13 @@ count | `count [class_name]` or `[class_name].count()`| Counts all the instances
 File Name | Description
 --- | ---
 `models/base_model.py` | Base Class with public instance attributes and methods
+`models/amenity.py` | An amenity class that inherits from BaseModel
+`models/city.py` | A city class that inherits from BaseModel
+`models/place.py` | A place class that inherits from BaseModel
+`models/review.py` | A review class that inherits from BaseModel
+`models/state.py` | A state class that inherits from BaseModel
 `models/user.py` | A user class that inherits from BaseModel
+`models/engine/file_storage.py` |
 `tests/test_models/` | Unittests for BaseModel, User, amenity, city, place, review, and state
 `tests/test_models/test_engine/` | Unittest for file storage
 
@@ -69,7 +75,6 @@ Quit command to exit the program
 (hbnb)
 ```
 
-### About
-This project was created by [Adekunle Adeniran](https://github.com/flourishcodes) and
-[Victor Nguyen](https://github.com/vmdn23) at [Holberton
-School](http://holbertonschool.com).
+### Authors
+* Adekunle Adeniran | [GitHub](https://github.com/flourishcodes) | [Twitter](https://twitter.com/flourishcodes)
+* Victor Nguyen | [GitHub](https://github.com/vmdn23) | [Twitter](https://twitter.com/victormdnguyen)
