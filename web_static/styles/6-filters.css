@@ -69,12 +69,8 @@ ul.city {
     list-style-type: none;
 }
 
-ul.popover{
-    list-style-type: none;
-}
-
 .popover {
-    width: 105%;
+    width: 104%;
     height: 650%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
@@ -83,6 +79,7 @@ ul.popover{
     position: absolute;
     margin-top: 0px;
     left: -21%;
+    list-style-type: none;
     visibility: hidden;
 }
 
