@@ -13,3 +13,7 @@ div.fter {
     vertical-align: middle;
     text-align: center;
 }
+
+div.spacer {
+    height: 80px;
+}
