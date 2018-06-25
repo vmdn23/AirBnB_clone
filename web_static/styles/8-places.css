@@ -1,0 +1,86 @@
+/* container */
+.places {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+h1 {
+    padding-left: 5%;
+    margin-bottom: 0px;
+    text-align: left;
+
+}
+
+/* obj */
+.art {
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+}
+
+.homes {
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 15px;
+}
+
+.price_by_night {
+    color: #FF5A5F;
+    border: 4px solid #FF5A5F;
+    border-radius: 50%;
+    width: 70px;
+    height: 60px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 55px;
+    margin-left: 80%;
+    margin-top: -100px;
+    margin-bottom: 20px;
+}
+
+.information {
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    height: 80px;
+    text-align: center;
+    background-position: center;
+    display: flex;
+    padding-top: 10px;
+
+}
+
+.user {
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.max_guest {
+    width: 100px;
+    background-image: url(https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/icon_group.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin-right: 35px;
+    padding-top: 50px;
+}
+
+.number_rooms {
+    width: 100px;
+    background-image: url(https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/icon_bed.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin-right: 35px;
+    padding-top: 50px;
+}
+
+.number_bathrooms {
+    width: 100px;
+    background-image: url(https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/icon_bath.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin-right: 35px;
+    padding-top: 50px;
+}
