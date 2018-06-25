@@ -1,0 +1,26 @@
+/* container */
+.places {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+h1 {
+    padding-left: 15%;
+    margin-bottom: 0px;
+}
+
+/* obj */
+.art {
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+}
+
+.homes {
+    text-align: center;
+    font-size: 30px;
+}
