@@ -1,9 +1,14 @@
 /* container */
-.places {
-    justify-content: center;
+.places_inner {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+}
 
+.place_title {
+    margin-left: -14%;
+    font-size: 30px;
 }
 
 h1 {
